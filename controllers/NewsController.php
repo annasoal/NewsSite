@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../models/News.php';
-require_once __DIR__ . '/../classes/Vie.php';
+require_once __DIR__ . '/../classes/View.php';
 //require_once __DIR__ . '/AbsController.php';
 
 class NewsController
