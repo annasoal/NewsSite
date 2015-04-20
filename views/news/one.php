@@ -72,7 +72,6 @@
     </div>
     <?php endforeach; ?>
 
-
     <footer>
         <div class="row">
             <div class="col-lg-12">
