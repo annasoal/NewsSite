@@ -64,7 +64,7 @@
 
     <?php
 
-    foreach ($this->items as $item):
+    foreach ($this->viewitems as $item):
     ?>
     <div class="jumbotron">
         <h2> <?php echo $item->title; ?></h2>

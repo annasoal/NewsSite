@@ -6,11 +6,14 @@ class View
 
 {
     protected $path;
-    protected $data = [];
+    public $data = [];
+    public $viewitems;
+
 
     public function __construct($path)
     {
         $this->path = $path;
+
     }
 
     public function __set($k, $v)
@@ -37,7 +40,7 @@ class View
         //$obj = new ArrayObject($this->data);
         //$items = $obj->getIterator();
 
-        $items = new DataIterator($this->data);
+        $this->viewitems = new DataIterator($this->data);
 
         ob_start();
 

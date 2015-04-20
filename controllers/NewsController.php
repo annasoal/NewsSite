@@ -15,14 +15,14 @@ class NewsController
 
     public function actionAll(){
         $news = new News();
-        $this->view->items = $news->getAllData();//получили массив новостей
-        $this->view->display('all',count($this->view->items));
+        $this->view->data = $news->getAllData();//получили массив новостей
+        $this->view->display('all',count($this->view->data));
 
     }
     public function actionOne(){
         $news = new News();
         $id = $_GET['id'];
-        $this->view->items = $news->getOneRecord($id);//получили массив новости
+        $this->view->data = $news->getOneRecord($id);//получили массив новости
         $this->view->display('one');
 
     }
