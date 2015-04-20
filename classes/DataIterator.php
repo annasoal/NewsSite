@@ -33,7 +33,6 @@ class DataIterator
 
     public function valid()
     {
-        $key = key($this->data);
-        return ($key !== NULL && $key !== FALSE);
+        return false !== current($this->data);
     }
 }

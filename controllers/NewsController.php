@@ -13,16 +13,17 @@ class NewsController
         $this->view = new View(__DIR__ . '/../views/news/');
     }
 
-    public function actionAll(){
-        $news = new News();
-        $this->view->data = $news->getAllData();//получили массив новостей
-        $this->view->display('all',count($this->view->data));
-
+    public function actionAll()
+    {
+        $this->view->items = News::findAll();
+        $this->view->display('all');
     }
+
+
     public function actionOne(){
-        $news = new News();
+
         $id = $_GET['id'];
-        $this->view->data = $news->getOneRecord($id);//получили массив новости
+        $this->view->items = News::findOne($id);//получили массив новости
         $this->view->display('one');
 
     }

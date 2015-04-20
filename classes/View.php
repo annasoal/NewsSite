@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/DataIterator.php';
+
 
 class View
     implements Countable
@@ -7,7 +7,7 @@ class View
 {
     protected $path;
     public $data = [];
-    public $viewitems;
+
 
 
     public function __construct($path)
@@ -31,16 +31,16 @@ class View
         return count($this->data);
     }
 
-    public function display($template, $quantity = null)
+    public function render($template)
     {
-        /*foreach ($this->data as $k => $v) {
-         $$k = $v;
+        foreach ($this->data as $k => $v) {
+        $$k = $v;
         }
-        */
+
         //$obj = new ArrayObject($this->data);
         //$items = $obj->getIterator();
 
-        $this->viewitems = new DataIterator($this->data);
+        //$quantity = count($this->data);
 
         ob_start();
 
@@ -49,9 +49,13 @@ class View
         $content = ob_get_contents();
         ob_end_clean();
 
-        If (isset ($quantity)) {
-            $content .= 'Всего новостей: ' . $quantity;
-        }
-        echo preg_replace('<copyright>', 'p> &copy; I LOVE PHP 2015 </p', $content);
+        //If ($quantity>=2) {
+            //$content .= 'Всего новостей: ' . $quantity;
+        //}
+        return str_replace('<copyright>', '<p> &copy; I LOVE PHP 2015 </p>', $content);
+    }
+    public function display ($template)
+    {
+       echo $this->render($template);
     }
 }

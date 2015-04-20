@@ -61,8 +61,8 @@
     </div>
 
 
-    <?php
-        foreach ($this->viewitems as $item):?>
+    <?php var_dump($items);
+        foreach ($items as $item):?>
         <div class="jumbotron">
             <h2> <?php echo '<a href="?ctrl=news&action=actionOne&id=' . $item->id . '">' . $item->title . '</a>';?></h2>
             <div><?php echo $item->author, '<br>', '<span>', $item->date, '<span>';?></div>

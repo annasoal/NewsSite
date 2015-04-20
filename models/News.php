@@ -1,11 +1,18 @@
 <?php
-require_once __DIR__ . '/ArticleDb.php';
+require_once __DIR__ . '/../classes/Model.php';
 
 class News
-    extends ArticleDb
+    extends Model
+
 {
-    public function setTableName()
-    {
-        return 'news';
-    }
+    protected static $table = 'news';
+    public $id;
+    public $title;
+    public $text;
+    public $author;
+    public $date;
+
+
+
 }
+
