@@ -64,7 +64,6 @@
     <?php foreach ($this->items as $item):?>
         <div class="jumbotron">
             <h2> <?php echo '<a href="?ctrl=news&action=actionOne&id=' . $item->id . '">' . $item->title . '</a>';?></h2>
-
             <div><?php echo $item->author, '<br>', '<span>', $item->date, '<span>';?></div>
         </div>
     <?php endforeach; ?>
