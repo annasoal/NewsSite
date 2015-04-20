@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . '/DataIterator.php';
 
-
-
 class View
     implements Countable
 
@@ -28,7 +26,6 @@ class View
     public function count()
     {
         return count($this->data);
-
     }
 
     public function display($template, $quantity = null)
