@@ -22,8 +22,7 @@ class AdminController
 
     public function addOne()
     {
-
-        If ($_POST['title'] != '' && $_POST['text'] != '') {
+        If (!empty($_POST)&& $_POST['title'] != '' && $_POST['text'] != '') {
             $news = new News();
             $news->title = $_POST['title'];
             $news->text = $_POST['text'];
@@ -36,23 +35,7 @@ class AdminController
         } elseif ($_POST['title'] == '' || $_POST['text'] == '') {
             $_SESSION['errors'] = 'Не введены обязательные данные';
         }
-
         header('Location: http://newssite/index.php?ctrl=admin&action=addOne');
-        exit;
-    }
-
-
-    public function delete()
-    {
-        $id = $_GET['id'];
-        $news = new News();
-        $res = $news->delete($id);
-        $this->view->display('delete');
-        if (false !== $res) {
-            $_SESSION['delok'] = 'Новость удалена';
-        } else {
-            $_SESSION['delerrors'] = 'Новость невозможно удалить';
-        }
         exit;
     }
 
@@ -66,7 +49,7 @@ class AdminController
     {
         $news = new News();
         $news->id = $_GET['id'];
-        If ($_POST['title'] != '' && $_POST['text'] != '') {
+        If (!empty($_POST)&&$_POST['title'] != '' && $_POST['text'] != '') {
             $news->title = $_POST['title'];
             $news->text = $_POST['text'];
             $news->author = $_POST['author'];
@@ -77,14 +60,25 @@ class AdminController
                 $this->view->items = News::findOne($news->id);
                 $this->view->display('one');
             }
+
         } elseif ($_POST['title'] == '' || $_POST['text'] == '') {
             $_SESSION['updateerrors'] = 'Не введены обязательные данные';
-            $this->view->items = News::findOne($news->id);
-            $this->view->display('update');
+            $this->showupdate();
         }
-
         exit;
+    }
 
-
+    public function delete()
+    {
+        $id = $_GET['id'];
+        $news = new News();
+        $res = $news->delete($id);
+        $this->view->display('delete');
+        if (false !== $res) {
+            $_SESSION['delok'] = 'Новость удалена';
+        } else {
+            $_SESSION['delerrors'] = 'Новость невозможно удалить';
+        }
+        exit;
     }
 }
