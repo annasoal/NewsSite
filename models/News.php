@@ -11,10 +11,11 @@ class News
     public $text;
     public $author;
     public $date;
+    public $data;
 
-    public function values()
+    public function data()
     {
-        return $vals = get_object_vars($this);
+        return $this->data = get_object_vars($this);
     }
 }
 

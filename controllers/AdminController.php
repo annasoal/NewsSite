@@ -28,8 +28,8 @@ class AdminController
             $news->title = $_POST['title'];
             $news->text = $_POST['text'];
             $news->author = $_POST['author'];
-            $values = $news->values();
-            $res = $news->insert($values);
+            $news->values = $news->data();
+            $res = $news->insert();
             If ($res !== false) {
                 $_SESSION['ok'] = 'Новость добавлена, перейдите на главную страницу для просмотра. Id новости:' . $res;
             }
@@ -70,8 +70,8 @@ class AdminController
             $news->title = $_POST['title'];
             $news->text = $_POST['text'];
             $news->author = $_POST['author'];
-            $values = $news->values();
-            $res = $news->update($values);
+            $news->values = $news->data();
+            $res = $news->update();
 
             If ($res !== false) {
                 $this->view->items = News::findOne($news->id);
