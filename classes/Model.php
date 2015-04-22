@@ -10,11 +10,6 @@ abstract class Model
         return static::$table;
     }
 
-    public static function columns()
-    {
-        return get_class_vars(static::class);
-    }
-
     abstract public function data();
 
 
@@ -34,22 +29,18 @@ abstract class Model
         return $db->getData($class, $sql, [':id' => $id]);
     }
 
-
     public function insert()
     {
-        $class = static::class;
-
         $values = $this->values;
-        $vars = $class::columns();
-        foreach ($vars as $key => $val) {
-            foreach ($values as $k => $el) {
-                if (($key == $k) && ($el != null)) {
-                    $cols = $cols . ', ' . $key;//значения колонок из списка свойств класса
-                    $vals = $vals . ', :' . $key;//значения ключей полей записи при совпадении со свойством класса
-                    $params[':' . $key] = $el;// значения полей из списка свойств объекта
-                }
+
+        foreach ($values as $k => $el) {
+            if (($el != null)) {
+                $cols = $cols . ', ' . $k;
+                $vals = $vals . ', :' . $k;
+                $params[':' . $k] = $el;
             }
         }
+
 
         $sql = 'INSERT INTO ' . static::setTableName() . ' (' . trim($cols, ', ') . ') VALUES (' . trim($vals, ', ') . ')';
 
@@ -64,25 +55,23 @@ abstract class Model
         $db = new DataB();
         return $db->deleteRecord($sql, [':id' => $id]);
     }
-    public function update()
+
+    public
+    function update()
     {
-        $class = static::class;
-
         $values = $this->values;
-        $vars = $class::columns();
 
-        foreach ($vars as $key => $val) {
-            foreach ($values as $k => $el) {
-                if (($key == $k) && ($el != null)) {
-                    $str = $str . ', ' . $key . '=:' . $key;
-                    $params[':' . $key] = $el;
-                }
+        foreach ($values as $k => $el) {
+            if (($el != null)) {
+                $str = $str . ', ' . $k . '=:' . $k;
+                $params[':' . $k] = $el;
             }
         }
-        $sql = 'UPDATE ' . static::setTableName() . ' SET ' .(trim($str,', ')) .' WHERE id=:id';
+
+        $sql = 'UPDATE ' . static::setTableName() . ' SET ' . (trim($str, ', ')) . ' WHERE id=:id';
 
         $db = new DataB();
-        return $db->deleteRecord($sql,$params);
+        return $db->updateRecord($sql, $params);
     }
 }
 
