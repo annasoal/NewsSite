@@ -2,7 +2,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Главная страница</title>
+    <title>Добавление новости</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/superhero/bootstrap.min.css">
@@ -56,52 +56,83 @@
                     </ul>
                 </div>
             </div>
-
         </nav>
     </div>
 
+    <?php
 
-    <?php foreach ($items as $item):?>
-        <div class="jumbotron">
-            <h2> <?php echo '<a href="?ctrl=news&action=actionOne&id=' . $item->id . '">' . $item->title . '</a>';?></h2>
-            <div><?php echo $item->author, '<br>', '<span>', $item->date, '<span>';?></div>
-        </div>
+    foreach ($items as $item):
+    ?>
+    <form class="form-horizontal" name="updatepost" action="?ctrl=admin&action=update&id=<?php echo $item->id;?>" method="post">
+        <fieldset>
+            <legend>Редактирование новости</legend>
+            <div class="form-group">
+                <label for="title" class="col-lg-2 control-label">Заголовок</label>
+                <div class="col-lg-10">
+                    <input type="text" name="title" class="form-control" placeholder="Заголовок" value="<?php echo $item->title;?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textArea" class="col-lg-2 control-label">Новость</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="5" name="text" id="textArea"><?php echo $item->text;?></textarea>
+                    <span class="help-block">Описание события</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="title" class="col-lg-2 control-label">Дата</label>
+                <div class="col-lg-10">
+                    <input type="text" name="date" class="form-control"  disabled
+                           value=<?php echo '"' . date('d-m-Y') . '"'; ?>>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="title" class="col-lg-2 control-label">Автор</label>
+                <div class="col-lg-10">
+                    <input type="text" name="author" value="<?php echo $item->author;?>"class="form-control" placeholder="Автор">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" name="updateit" class="btn btn-primary">Сохранить изменения</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
     <?php endforeach; ?>
+    <?php
 
 
+    If (($_SESSION ['updateerrors']) != '') {
+        echo '<div class="jumbotron"> <h4>' .
+            $_SESSION['updateerrors'] . '</h4></div>';
+        unset ($_SESSION['updateerrors']);
+    }
 
-    <ul class="pagination pagination-sm">
-        <li class="disabled"><a href="#">«</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">»</a></li>
-    </ul>
-
+    ?>
 
     <footer>
         <div class="row">
             <div class="col-lg-12">
                 <copyright>
-                <ul class="list-unstyled">
-                    <li class="pull-right"><a href="#top">Наверх</a></li>
-                    <li><a href="#" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
-                    <li><a href="#">RSS</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">API</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
-
-                <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>.
-                    Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.
-                    Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
+                    <ul class="list-unstyled">
+                        <li class="pull-right"><a href="#top">Наверх</a></li>
+                        <li><a href="#" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
+                        <li><a href="#">RSS</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                    <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>.
+                        Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.
+                        Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
 
             </div>
         </div>
     </footer>
+
 </div>
 
 
@@ -113,4 +144,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 </body>
-</html>
+</html><?php
+/**
+ * Created by PhpStorm.
+ * User: Анна
+ * Date: 22.04.2015
+ * Time: 0:07
+ */

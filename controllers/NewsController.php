@@ -20,12 +20,11 @@ class NewsController
     }
 
 
-    public function actionOne(){
-
+    public function actionOne()
+    {
         $id = $_GET['id'];
         $this->view->items = News::findOne($id);//получили массив новости
         $this->view->display('one');
-
     }
 
 

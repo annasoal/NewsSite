@@ -2,42 +2,89 @@
 require_once __DIR__ . '/../models/News.php';
 //require_once __DIR__ . '/AbsController.php';
 require_once __DIR__ . '/../classes/View.php';
+require_once __DIR__ . '/NewsController.php';
 
 class AdminController
     //extends AbsController
 {
     protected $view;
 
+
     public function __construct()
     {
         $this->view = new View(__DIR__ . '/../views/news/');
     }
 
-    public function show()
+    public function showpost()
     {
         $this->view->display('post');
     }
 
     public function addOne()
     {
+
         If ($_POST['title'] != '' && $_POST['text'] != '') {
-            $title = $_POST['title'];
-            $text = $_POST['text'];
-            $author = $_POST['author'];
-            $date = date('Y-m-d H:i:s');
-
-            $news = new News($title, $text, $author, $date);
-            $add = $news->addOneRecord();
-
-            If ($add !== false) {
-                $_SESSION['ok'] = 'Новость добавлена, перейдите на главную страницу для просмотра';
+            $news = new News();
+            $news->title = $_POST['title'];
+            $news->text = $_POST['text'];
+            $news->author = $_POST['author'];
+            $values = $news->values();
+            $res = $news->insert($values);
+            If ($res !== false) {
+                $_SESSION['ok'] = 'Новость добавлена, перейдите на главную страницу для просмотра. Id новости:' . $res;
             }
         } elseif ($_POST['title'] == '' || $_POST['text'] == '') {
             $_SESSION['errors'] = 'Не введены обязательные данные';
         }
 
-        header('Location: http://php-lessons/index.php?ctrl=admin&action=addOne');
+        header('Location: http://newssite/index.php?ctrl=admin&action=addOne');
+        exit;
+    }
+
+
+    public function delete()
+    {
+        $id = $_GET['id'];
+        $news = new News();
+        $res = $news->delete($id);
+        $this->view->display('delete');
+        if (false !== $res) {
+            $_SESSION['delok'] = 'Новость удалена';
+        } else {
+            $_SESSION['delerrors'] = 'Новость невозможно удалить';
+        }
+        exit;
+    }
+
+    public function showupdate()
+    {
+        $id = $_GET['id'];
+        $this->view->items = News::findOne($id);//получили массив новости
+        $this->view->display('update');
+    }
+    public function update()
+    {
+        $news = new News();
+        $news->id = $_GET['id'];
+        If ($_POST['title'] != '' && $_POST['text'] != '') {
+            $news->title = $_POST['title'];
+            $news->text = $_POST['text'];
+            $news->author = $_POST['author'];
+            $values = $news->values();
+            $res = $news->update($values);
+
+            If ($res !== false) {
+                $this->view->items = News::findOne($news->id);
+                $this->view->display('one');
+            }
+        } elseif ($_POST['title'] == '' || $_POST['text'] == '') {
+            $_SESSION['updateerrors'] = 'Не введены обязательные данные';
+            $this->view->items = News::findOne($news->id);
+            $this->view->display('update');
+        }
 
         exit;
+
+
     }
 }

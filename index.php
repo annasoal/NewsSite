@@ -7,9 +7,14 @@ if (!empty ($_GET['id']) && ($_GET['action'] == 'actionOne')) {
     $action = 'actionOne';
 
 } elseif ($_GET['action'] == 'addOne') {
-    $action = 'show';
+    $action = 'showpost';
     If (isset ($_POST['postit'])) {
         $action = 'addOne';
+    }
+}elseif ($_GET['action'] == 'update') {
+    $action = 'showupdate';
+    If (isset ($_POST['updateit'])) {
+        $action = 'update';
     }
 }
 $ctrlClassName = ucfirst($ctrl) . 'Controller';

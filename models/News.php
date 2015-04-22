@@ -12,7 +12,9 @@ class News
     public $author;
     public $date;
 
-
-
+    public function values()
+    {
+        return $vals = get_object_vars($this);
+    }
 }
 

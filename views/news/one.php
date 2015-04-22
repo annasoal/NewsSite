@@ -64,13 +64,26 @@
 
     <?php
 
-    foreach ($this->viewitems as $item):
+    foreach ($items as $item):
     ?>
     <div class="jumbotron">
         <h2> <?php echo $item->title; ?></h2>
         <?php echo '<p class="lead">', $item->text, '</p>', $item->author, '<br>', '<span>', $item->date, '<span>'; ?>
     </div>
     <?php endforeach; ?>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Работа с контентом</h3>
+        </div>
+        <div class="panel-body">
+            <?php echo '<a href="?ctrl=admin&action=update&id=' . $item->id?>" class="btn btn-primary"> Изменить новость</a>
+            <?php echo '<a href="?ctrl=admin&action=delete&id=' . $item->id?>" class="btn btn-danger">Удалить новость</a>
+        </div>
+    </div>
+
+
+
 
     <footer>
         <div class="row">
