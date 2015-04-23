@@ -35,17 +35,20 @@ abstract class Model
 
         foreach ($values as $k => $el) {
             if (($el != null)) {
-                $cols = $cols . ', ' . $k;
-                $vals = $vals . ', :' . $k;
+                $cols[] =$k;
+                $vals[] =  ':' . $k;
                 $params[':' . $k] = $el;
             }
         }
+        $colsStr = implode(',', $cols);
+        $valsStr = implode(',', $vals);
 
 
-        $sql = 'INSERT INTO ' . static::setTableName() . ' (' . trim($cols, ', ') . ') VALUES (' . trim($vals, ', ') . ')';
+        $sql = 'INSERT INTO ' . static::setTableName() . ' (' . $colsStr . ') VALUES (' . $valsStr . ')';
 
         $db = new DataB();
-        return $id = $db->addRecord($sql, $params);
+        $db->execChanges($sql, $params);
+        return $id = $db->getInsertId();
     }
 
     public function delete($id)
@@ -53,7 +56,7 @@ abstract class Model
 
         $sql = 'DELETE FROM ' . static::setTableName() . ' WHERE id=:id';
         $db = new DataB();
-        return $db->deleteRecord($sql, [':id' => $id]);
+        return $db->execChanges($sql, [':id' => $id]);
     }
 
     public
@@ -63,15 +66,16 @@ abstract class Model
 
         foreach ($values as $k => $el) {
             if (($el != null)) {
-                $str = $str . ', ' . $k . '=:' . $k;
+                $str[] = $k . '=:' . $k;
                 $params[':' . $k] = $el;
             }
         }
+        $strStr = implode(',',$str);
 
-        $sql = 'UPDATE ' . static::setTableName() . ' SET ' . (trim($str, ', ')) . ' WHERE id=:id';
+        $sql = 'UPDATE ' . static::setTableName() . ' SET ' . $strStr . ' WHERE id=:id';
 
         $db = new DataB();
-        return $db->updateRecord($sql, $params);
+        return $db->execChanges($sql, $params);
     }
 }
 

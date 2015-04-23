@@ -28,9 +28,9 @@ class AdminController
             $news->text = $_POST['text'];
             $news->author = $_POST['author'];
             $news->values = $news->data();
-            $res = $news->insert();
-            If ($res !== false) {
-                $_SESSION['ok'] = 'Новость добавлена, перейдите на главную страницу для просмотра. Id новости:' . $res;
+            $news->id = $news->insert();
+            If ($news->id !== false) {
+                $_SESSION['ok'] = 'Новость добавлена, перейдите на главную страницу для просмотра. Id новости:' . $news->id;
             }
         } elseif ($_POST['title'] == '' || $_POST['text'] == '') {
             $_SESSION['errors'] = 'Не введены обязательные данные';

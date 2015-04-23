@@ -19,26 +19,18 @@ class DataB
         $arr = $sth->fetchAll(PDO::FETCH_CLASS, $class);
         return $arr;
     }
-    public function addRecord($sql,$params=[])
+
+    public function execChanges ($sql,$params=[])
     {
         $sth = $this->dbh->prepare($sql);
-        $sth->execute($params);
+        $res = $sth->execute($params);
+        return $res;
+    }
+
+    public function getInsertId()
+    {
         $id  = $this->dbh->lastInsertId();
         return $id;
-
-    }
-    public function deleteRecord($sql,$params=[])
-    {
-        $sth = $this->dbh->prepare($sql);
-        $res = $sth->execute($params);
-        return $res;
-    }
-    public function updateRecord($sql,$params=[])
-    {
-        $sth = $this->dbh->prepare($sql);
-        $res = $sth->execute($params);
-        return $res;
-
     }
 }
 
