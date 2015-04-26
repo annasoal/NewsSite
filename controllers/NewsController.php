@@ -1,10 +1,7 @@
 <?php
-require_once __DIR__ . '/../models/News.php';
-require_once __DIR__ . '/../classes/View.php';
-//require_once __DIR__ . '/AbsController.php';
 
 class NewsController
-   //extends AbsController
+
 
 {
     protected $view;
@@ -25,6 +22,7 @@ class NewsController
         $id = $_GET['id'];
         $this->view->items = News::findOne($id);//получили массив новости
         $this->view->display('one');
+
     }
 
 

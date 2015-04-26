@@ -1,9 +1,10 @@
 <?php
-require __DIR__ . '/../classes/DataB.php';
+//require __DIR__ . '/../classes/DataB.php';
 
 abstract class Model
 {
     protected static $table;
+    protected $data;
 
     public static function setTableName()
     {
@@ -26,12 +27,17 @@ abstract class Model
         $class = static::class;
         $sql = 'SELECT * FROM ' . static::setTableName() . ' WHERE id=:id';
         $db = new DataB();
-        return $db->getData($class, $sql, [':id' => $id]);
+        $res =  $db->getData($class, $sql, [':id' => $id]);
+        if (false != $res ) {
+            return $res;
+        } else {
+            throw new E404Exception();
+        }
     }
 
     public function insert()
     {
-        $values = $this->values;
+        $values = $this->data;
 
         foreach ($values as $k => $el) {
             if (($el != null)) {
@@ -48,21 +54,20 @@ abstract class Model
 
         $db = new DataB();
         $db->execChanges($sql, $params);
-        return $id = $db->getInsertId();
+        $this->id = $db->getInsertId();
     }
 
-    public function delete($id)
+    public function delete()
     {
 
         $sql = 'DELETE FROM ' . static::setTableName() . ' WHERE id=:id';
         $db = new DataB();
-        return $db->execChanges($sql, [':id' => $id]);
+        return $db->execChanges($sql, [':id' => $this->id]);
     }
 
-    public
-    function update()
+    public  function update()
     {
-        $values = $this->values;
+        $values = $this->data;
 
         foreach ($values as $k => $el) {
             if (($el != null)) {

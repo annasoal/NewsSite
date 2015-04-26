@@ -1,11 +1,10 @@
 <?php
 session_start()
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Добавление новости</title>
+    <title>Новость</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/superhero/bootstrap.min.css">
@@ -59,67 +58,39 @@ session_start()
                     </ul>
                 </div>
             </div>
+
         </nav>
     </div>
 
 
-    <form class="form-horizontal" name="addpost" action="?ctrl=admin&action=addOne" method="post">
-        <fieldset>
-            <legend>Добавление новости</legend>
-            <div class="form-group">
-                <label for="title" class="col-lg-2 control-label">Заголовок</label>
-                <div class="col-lg-10">
-                    <input type="text" name="title" class="form-control" placeholder="Заголовок">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="textArea" class="col-lg-2 control-label">Новость</label>
-                <div class="col-lg-10">
-                    <textarea class="form-control" rows="5" name="text" id="textArea"></textarea>
-                    <span class="help-block">Описание события</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="title" class="col-lg-2 control-label">Дата</label>
-                <div class="col-lg-10">
-                    <input type="text" name="date" class="form-control" placeholder="Заголовок" disabled
-                           value=<?php echo '"' . date('d-m-Y') . '"'; ?>>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="title" class="col-lg-2 control-label">Автор</label>
-                <div class="col-lg-10">
-                    <input type="text" name="author" class="form-control" placeholder="Автор">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                    <button type="reset" class="btn btn-default">Очистить</button>
-                    <button type="submit" name="postit" class="btn btn-primary">Отправить</button>
-                </div>
-            </div>
 
-        </fieldset>
-    </form>
     <?php
 
+    foreach ($items as $item):
+        ?>
+        <div class="jumbotron">
+            <h2> <?php echo 'Ваш логин: '.$item->login; ?></h2>
+            <?php echo '<p class="lead" Пароль>', $item->password, '</p>', $item->firstname, '<br>', '<span>', $item->lastname, '<span>'; ?>
+        </div>
+    <?php endforeach; ?>
 
-    If (($_SESSION ['posterrors']) != '') {
-        echo '<div class="jumbotron"> <h4>' .
-            $_SESSION['posterrors'] . '</h4></div>';
-        unset ($_SESSION['posterrors']);
-    }
-    If (($_SESSION ['postok']) != '') {
-        echo '<div class="jumbotron"> <h4>' .
-            $_SESSION['postok'] . '</h4></div>';
-        unset ($_SESSION['postok']);
-    }
-    ?>
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Работа с профилем</h3>
+    </div>
+    <div class="panel-body">
+        <?php echo '<a href="?ctrl=users&action=update&id=' . $item->id?>" class="btn btn-primary"> Изменить профиль</a>
+        <?php echo '<a href="?ctrl=users&action=delete&id=' . $item->id?>" class="btn btn-danger">Удалить профиль</a>
+    </div>
+</div>
 
-    <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <copyright>
+
+
+
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <copyright>
                 <ul class="list-unstyled">
                     <li class="pull-right"><a href="#top">Наверх</a></li>
                     <li><a href="#" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
@@ -133,10 +104,9 @@ session_start()
                     Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.
                     Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
 
-            </div>
         </div>
-    </footer>
-
+    </div>
+</footer>
 </div>
 
 

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../classes/Model.php';
+//require_once __DIR__ . '/../classes/Model.php';
 
 class News
     extends Model
@@ -11,7 +11,7 @@ class News
     public $text;
     public $author;
     public $date;
-    public $data;
+
 
     public function data()
     {

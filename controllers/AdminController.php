@@ -1,11 +1,8 @@
 <?php
-//require_once __DIR__ . '/../models/News.php';
-//require_once __DIR__ . '/AbsController.php';
-//require_once __DIR__ . '/../classes/View.php';
-//require_once __DIR__ . '/NewsController.php';
+
 
 class AdminController
-    //extends AbsController
+
 {
     protected $view;
     public static $model = 'News';
@@ -22,7 +19,7 @@ class AdminController
 
     public function addOne()
     {
-        if (!empty($_POST)&& $_POST['title'] != '' && $_POST['text'] != '') {
+        if ($_POST['title'] != '' && $_POST['text'] != '') {
             $news = new News();
             $news->title = $_POST['title'];
             $news->text = $_POST['text'];
@@ -30,10 +27,10 @@ class AdminController
             $news->values = $news->data();
             $news->insert();
             if ($news->id !== false) {
-                $_SESSION['ok'] = 'Новость добавлена, перейдите на главную страницу для просмотра. Id новости:' . $news->id;
+                $_SESSION['postok'] = 'Новость добавлена, перейдите на главную страницу для просмотра. Id новости:' . $news->id;
             }
         } elseif ($_POST['title'] == '' || $_POST['text'] == '') {
-            $_SESSION['errors'] = 'Не введены обязательные данные';
+            $_SESSION['posterrors'] = 'Не введены обязательные данные';
         }
         header('Location: http://newssite/index.php?ctrl=admin&action=addOne');
         exit;
@@ -52,12 +49,10 @@ class AdminController
         $this->id = $_GET['id'];
         $model = static::$model;
         $news = $model::findOne($this->id)[0];
-        if (!empty($_POST)&& $_POST['title'] != '' && $_POST['text'] != '') {
+        if ($_POST['title'] != '' && $_POST['text'] != '') {
             $news->title = $_POST['title'];
             $news->text = $_POST['text'];
             $news->author = $_POST['author'];
-            //var_dump($_POST);
-            //var_dump($news);
             $news->values = $news->data();
             $res = $news->update();
 

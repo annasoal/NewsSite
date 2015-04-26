@@ -5,7 +5,7 @@ session_start()
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Новость</title>
+    <title>Главная страница</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/superhero/bootstrap.min.css">
@@ -36,11 +36,11 @@ session_start()
                         <li><a href="?ctrl=admin&action=addOne">Добавить новость</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">Dropdown <span class="caret"></span></a>
+                               aria-expanded="false">Пользовательское меню <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="?ctrl=admin&action=addOne">Зарегистрироваться</a></li>
+                                <li><a href="#">Авторизоваться</a></li>
+                                <li><a href="#">Просмотреть/изменить профиль</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                                 <li class="divider"></li>
@@ -64,19 +64,75 @@ session_start()
     </div>
 
 
+    <form class="form-horizontal" method="post" action="?ctrl=users&action=addUser" name="adduser">
+    <fieldset>
+        <legend>Форма регистрации</legend>
+        <div class="form-group">
+            <label for="firstname" class="col-lg-2 control-label">Имя</label>
+            <div class="col-lg-10">
+                <input type="text" name="firstname" class="form-control" id="firstname" placeholder="Имя пользователя">
+            </div>
+        </div><div class="form-group">
+            <label for="lastname" class="col-lg-2 control-label">Фамилия</label>
+            <div class="col-lg-10">
+                <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Фамилия пользователя">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail" class="col-lg-2 control-label">Электронная почта</label>
+            <div class="col-lg-10">
+                <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-lg-2 control-label">Пароль</label>
+            <div class="col-lg-10">
+                <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Пароль">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember"> Запомнить меня
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-lg-2 control-label">Пол</label>
+            <div class="col-lg-10">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsGender" id="optionsRadios1" value="Женский" checked="">
+                        Женский пол
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="optionsGender" id="optionsRadios2" value="Мужской">
+                        Мужской пол
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Очистить форму</button>
+                <button type="submit" name="register" class="btn btn-primary">Зарегистрироваться</button>
+            </div>
+        </div>
+    </fieldset>
+    </form>
 
     <?php
-
-
-    If (($_SESSION ['delerrors']) != '') {
-        echo '<div class="jumbotron"> <h4>' .
-            $_SESSION['delerrors'] . '</h4></div>';
-        unset ($_SESSION['delerrors']);
+    If (($_SESSION ['errors']) != '') {
+    echo '<div class="jumbotron"> <h4>' .
+            $_SESSION['errors'] . '</h4></div>';
+    unset ($_SESSION['errors']);
     }
-    If (($_SESSION ['delok']) != '') {
-        echo '<div class="jumbotron"> <h4>' .
-            $_SESSION['delok'] . '</h4></div>';
-        unset ($_SESSION['delokk']);
+    If (($_SESSION ['ok']) != '') {
+    echo '<div class="jumbotron"> <h4>' .
+            $_SESSION['ok'] . '</h4></div>';
+    unset ($_SESSION['ok']);
     }
     ?>
 
@@ -96,6 +152,7 @@ session_start()
                         <li><a href="#">API</a></li>
                         <li><a href="#">Support</a></li>
                     </ul>
+
                     <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>.
                         Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.
                         Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>

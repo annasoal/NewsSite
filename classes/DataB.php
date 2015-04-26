@@ -18,6 +18,7 @@ class DataB
         $sth->execute($params);
         $arr = $sth->fetchAll(PDO::FETCH_CLASS, $class);
         return $arr;
+
     }
 
     public function execChanges ($sql,$params=[])

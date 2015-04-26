@@ -5,7 +5,7 @@ session_start()
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Добавление новости</title>
+    <title>Главная страница</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/superhero/bootstrap.min.css">
@@ -36,11 +36,11 @@ session_start()
                         <li><a href="?ctrl=admin&action=addOne">Добавить новость</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">Dropdown <span class="caret"></span></a>
+                               aria-expanded="false">Пользовательское меню <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="?ctrl=admin&action=addOne">Зарегистрироваться</a></li>
+                                <li><a href="#">Авторизоваться</a></li>
+                                <li><a href="#">Просмотреть/изменить профиль</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                                 <li class="divider"></li>
@@ -59,67 +59,62 @@ session_start()
                     </ul>
                 </div>
             </div>
+
         </nav>
     </div>
 
 
-    <form class="form-horizontal" name="addpost" action="?ctrl=admin&action=addOne" method="post">
-        <fieldset>
-            <legend>Добавление новости</legend>
-            <div class="form-group">
-                <label for="title" class="col-lg-2 control-label">Заголовок</label>
-                <div class="col-lg-10">
-                    <input type="text" name="title" class="form-control" placeholder="Заголовок">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="textArea" class="col-lg-2 control-label">Новость</label>
-                <div class="col-lg-10">
-                    <textarea class="form-control" rows="5" name="text" id="textArea"></textarea>
-                    <span class="help-block">Описание события</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="title" class="col-lg-2 control-label">Дата</label>
-                <div class="col-lg-10">
-                    <input type="text" name="date" class="form-control" placeholder="Заголовок" disabled
-                           value=<?php echo '"' . date('d-m-Y') . '"'; ?>>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="title" class="col-lg-2 control-label">Автор</label>
-                <div class="col-lg-10">
-                    <input type="text" name="author" class="form-control" placeholder="Автор">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                    <button type="reset" class="btn btn-default">Очистить</button>
-                    <button type="submit" name="postit" class="btn btn-primary">Отправить</button>
-                </div>
-            </div>
+    <form class="form-horizontal" method="post" action="?ctrl=users&action=findUser" name="finduser">
+    <fieldset>
+        <legend>Форма авторизации</legend>
 
-        </fieldset>
+        <div class="form-group">
+            <label for="inputEmail" class="col-lg-2 control-label">Логин</label>
+            <div class="col-lg-10">
+                <input type="text" name="login" class="form-control" id="inputEmail" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-lg-2 control-label">Пароль</label>
+            <div class="col-lg-10">
+                <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Пароль">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember"> Запомнить меня
+</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-10 col-lg-offset-2">
+                <button type="reset" class="btn btn-default">Очистить форму</button>
+                <button type="submit" name="authorize" class="btn btn-primary">Авторизоваться</button>
+            </div>
     </form>
+
     <?php
-
-
-    If (($_SESSION ['posterrors']) != '') {
+    If (($_SESSION['authorizeerrors']) != '') {
         echo '<div class="jumbotron"> <h4>' .
-            $_SESSION['posterrors'] . '</h4></div>';
-        unset ($_SESSION['posterrors']);
+            $_SESSION['authorizeerrors'] . '</h4></div>';
+        unset ($_SESSION['authorizeerrors']);
     }
-    If (($_SESSION ['postok']) != '') {
+    If (($_SESSION ['authorizeok']) != '') {
         echo '<div class="jumbotron"> <h4>' .
-            $_SESSION['postok'] . '</h4></div>';
-        unset ($_SESSION['postok']);
+            $_SESSION['authorizeok'] . '</h4></div>';
+        unset ($_SESSION['authorizeok']);
     }
     ?>
 
-    <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <copyright>
+
+
+
+</div>
+</fieldset>
+<footer>
+    <div class="row">
+        <div class="col-lg-12">
+            <copyright>
                 <ul class="list-unstyled">
                     <li class="pull-right"><a href="#top">Наверх</a></li>
                     <li><a href="#" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
@@ -129,14 +124,14 @@ session_start()
                     <li><a href="#">API</a></li>
                     <li><a href="#">Support</a></li>
                 </ul>
+
                 <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>.
                     Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.
                     Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
 
-            </div>
         </div>
-    </footer>
-
+    </div>
+</footer>
 </div>
 
 
