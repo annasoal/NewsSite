@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+use App\GeneralClasses\E403Exception;
+use App\GeneralClasses\E404Exception;
 
 require_once __DIR__ . '/autoload.php';
 $ctrl = !empty($_GET['ctrl']) ? $_GET['ctrl'] : 'news';
@@ -15,7 +17,7 @@ try {
 
     $e->showException();
 
-}catch (E403Exception $e) {
+} catch (E403Exception $e) {
 
     $e->showException();
 

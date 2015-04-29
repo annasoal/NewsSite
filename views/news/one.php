@@ -64,8 +64,6 @@ session_start()
         </nav>
     </div>
 
-
-
     <?php
 
     foreach ($items as $item):

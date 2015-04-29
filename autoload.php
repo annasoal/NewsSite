@@ -5,10 +5,9 @@ function __autoload($class)
         $classNameParts = explode('\\', $class);
         if ($classNameParts[0] == 'App') {
             unset($classNameParts[0]);
-            $fileName = __DIR__ . implode('/', $classNameParts) . '.php';
+            $fileName = __DIR__ . '/' . implode('/', $classNameParts) . '.php';
             if (file_exists($fileName)) {
-                var_dump($fileName);
-                die;
+
                 require $fileName;
                 return true;
             }

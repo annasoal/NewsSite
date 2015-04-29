@@ -1,26 +1,26 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Models\News as Model;
-use App\GeneralClasses\E403Exception;
+use App\GeneralClasses\E403Exception as E403;
 use App\GeneralClasses\Application as App;
 use App\GeneralClasses\View;
 
-class AdminNews
+class Admin
 
 {
     protected $view;
     protected $userrole;
-    //public static $model = 'News';
+    public static $model = 'News';
 
     public function __construct()
     {
         $this->view = new View(__DIR__ . '/../views/news/');
         $this->userrole = App::getCurrentUserRole();
         if ($this->userrole != 'admin') {
-            throw new E403Exception;
+            throw new E403();
         }
-
     }
 
     public function showAddOne()
@@ -39,7 +39,8 @@ class AdminNews
                 $news->values = $news->data();
                 $news->insert();
                 if ($news->id !== false) {
-                    $_SESSION['postok'] = 'Новость добавлена, перейдите на главную страницу для просмотра. Id новости:' . $news->id;
+                    $_SESSION['postok'] = 'Новость добавлена, перейдите на главную страницу для просмотра. Id новости:' .
+                        $news->id;
                 }
             } elseif ($_POST['title'] == '' || $_POST['text'] == '') {
                 $_SESSION['posterrors'] = 'Не введены обязательные данные';
