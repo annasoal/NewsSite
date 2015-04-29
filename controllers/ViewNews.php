@@ -1,6 +1,10 @@
 <?php
 
-class NewsController
+namespace App\Controllers;
+use App\Models\News;
+use App\ViewModel\View;
+
+class ViewNews
 
 
 {

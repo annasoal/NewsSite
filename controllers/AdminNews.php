@@ -1,7 +1,12 @@
 <?php
 
+namespace App\Controllers;
+use App\Models\News;
+use App\Exceptions\E403Exception;
+use App\General\App;
+use App\ViewModel\View;
 
-class AdminController
+class AdminNews
 
 {
     protected $view;

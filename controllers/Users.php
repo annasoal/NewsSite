@@ -1,9 +1,12 @@
 <?php
+namespace App\Controllers;
+use App\Models\User;
+use App\ViewModel\View;
 
-class UsersController
+class Users
 {
     protected $view;
-    public static $model = 'Users';
+    //public static $model = 'User';
 
     public function __construct()
     {
@@ -19,7 +22,7 @@ class UsersController
     {
         if (isset($_POST['register'])) {
             if ($_POST['email'] != '' && $_POST['password'] != '') {
-                $users = new Users();
+                $users = new User();
                 $users->firstname = $_POST['firstname'];
                 $users->lastname = $_POST['lastname'];
                 $users->login = $_POST['email'];
@@ -52,7 +55,7 @@ class UsersController
                 $login = $_POST['login'];
 
                 $password = $_POST['pass'];
-                $user = Users::findOneByLogin($login)[0];
+                $user = User::findOneByLogin($login)[0];
 
                 if ($user != false) {
                     if ($user->password == $password) {
@@ -63,7 +66,7 @@ class UsersController
                         //setcookie('id', $_SESSION['id'], time() + 86400 * 5);
                         //setcookie('role', $user->role, time() + 86400 * 5);
                         //var_dump($_COOKIE['role']);
-                        $this->view->items = Users::findOneByLogin($login);
+                        $this->view->items = User::findOneByLogin($login);
                         $this->view->display('profile');
 
 
@@ -86,7 +89,7 @@ class UsersController
     public function showProfile()
     {
         $id = $_GET['id'];
-        $this->view->items = Users::findOne($id);
+        $this->view->items = User::findOne($id);
         $this->view->display('profile');
     }
 }
