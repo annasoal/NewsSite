@@ -1,12 +1,9 @@
 <?php
+namespace App\Models;
+use App\Pdo\DataB;
 
-/**
- * Created by PhpStorm.
- * User: Анна
- * Date: 25.04.2015
- * Time: 21:36
- */
-class Users
+
+class User
     extends Model
 
 {

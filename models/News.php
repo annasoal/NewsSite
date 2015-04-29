@@ -1,6 +1,8 @@
 <?php
 
-//require_once __DIR__ . '/../classes/Model.php';
+namespace App\Models;
+
+
 
 class News
     extends Model
