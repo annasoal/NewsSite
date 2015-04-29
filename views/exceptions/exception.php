@@ -5,7 +5,7 @@ session_start()
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Новость</title>
+    <title>Главная страница</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/superhero/bootstrap.min.css">
@@ -65,23 +65,25 @@ session_start()
     </div>
 
 
+    <?php foreach ($items as $item):?>
 
-    <?php
+        <div class="jumbotron">
+            <h2> <?php echo  $item ?></h2>
 
-
-    If (($_SESSION ['delerrors']) != '') {
-        echo '<div class="jumbotron"> <h4>' .
-            $_SESSION['delerrors'] . '</h4></div>';
-        unset ($_SESSION['delerrors']);
-    }
-    If (($_SESSION ['delok']) != '') {
-        echo '<div class="jumbotron"> <h4>' .
-            $_SESSION['delok'] . '</h4></div>';
-        unset ($_SESSION['delokk']);
-    }
-    ?>
+        </div>
+    <?php endforeach; ?>
 
 
+
+    <ul class="pagination pagination-sm">
+        <li class="disabled"><a href="#">«</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">»</a></li>
+    </ul>
 
 
     <footer>
@@ -97,6 +99,7 @@ session_start()
                         <li><a href="#">API</a></li>
                         <li><a href="#">Support</a></li>
                     </ul>
+
                     <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>.
                         Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.
                         Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>

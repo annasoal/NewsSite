@@ -9,7 +9,6 @@ class View
     public $data = [];
 
 
-
     public function __construct($path)
     {
         $this->path = $path;
@@ -34,7 +33,7 @@ class View
     public function render($template)
     {
         foreach ($this->data as $k => $v) {
-        $$k = $v;
+            $$k = $v;
         }
 
         //$obj = new ArrayObject($this->data);
@@ -50,12 +49,13 @@ class View
         ob_end_clean();
 
         //If ($quantity>=2) {
-            //$content .= 'Всего новостей: ' . $quantity;
+        //$content .= 'Всего новостей: ' . $quantity;
         //}
         return str_replace('<copyright>', '<p> &copy; I LOVE PHP 2015 </p>', $content);
     }
-    public function display ($template)
+
+    public function display($template)
     {
-       echo $this->render($template);
+        echo $this->render($template);
     }
 }

@@ -1,10 +1,13 @@
 <?php
 
 class E404Exception
-    extends Exception
+    extends MyExceptions
 {
 
-    protected  $message = '<h2> Ошибка 404. Запрашиваемая страница не найдена. </h2>' ;
+    protected  $message = ['message' => 'Ошиибка 404. Запрашиваемая страница не найдена.'] ;
+
+    protected $view;
+
 
 
 }

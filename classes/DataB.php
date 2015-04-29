@@ -11,7 +11,7 @@ class DataB
         $this->dbh = new PDO($dsn, $config['user'], $config['password']);
     }
 
-    public function getData($class,$sql,$params=[])
+    public function getData($class, $sql, $params = [])
 
     {
         $sth = $this->dbh->prepare($sql);
@@ -21,7 +21,7 @@ class DataB
 
     }
 
-    public function execChanges ($sql,$params=[])
+    public function execChanges($sql, $params = [])
     {
         $sth = $this->dbh->prepare($sql);
         $res = $sth->execute($params);
@@ -30,7 +30,7 @@ class DataB
 
     public function getInsertId()
     {
-        $id  = $this->dbh->lastInsertId();
+        $id = $this->dbh->lastInsertId();
         return $id;
     }
 }

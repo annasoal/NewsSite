@@ -2,10 +2,10 @@
 
 
 class E403Exception
-    extends Exception
+    extends MyExceptions
 {
 
-    protected  $message = '<h2> Ошибка 403. Доступ запрещен. </h2>' ;
+    protected  $message = ['message' => 'Ошибка 403. Доступ запрещен.'];
 
 
 }

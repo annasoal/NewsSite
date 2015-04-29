@@ -1,8 +1,8 @@
 <?php
 session_start()
 ?>
-<!DOCTYPE html>
-<html>
+    <!DOCTYPE html>
+    <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title>Добавление новости</title>
@@ -33,14 +33,15 @@ session_start()
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/index.php"> Главная страница <span class="sr-only">(current)</span></a>
                         </li>
-                        <li><a href="?ctrl=admin&action=addOne">Добавить новость</a></li>
+                        <li><a href="?ctrl=admin&action=showaddOne">Добавить новость</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">Dropdown <span class="caret"></span></a>
+                               aria-expanded="false">Пользовательское меню <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="?ctrl=users&action=showRegistrationForm">Зарегистрироваться</a></li>
+                                <li><a href="?ctrl=users&action=showAuthorizationForm"">Авторизоваться</a></li>
+                                <li><a href="?ctrl=users&action=showProfile&id=<?php echo $_SESSION['id'] ?>">Просмотреть/изменить
+                                        профиль</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                                 <li class="divider"></li>
@@ -59,50 +60,59 @@ session_start()
                     </ul>
                 </div>
             </div>
+
         </nav>
     </div>
 
     <?php
 
     foreach ($items as $item):
-    ?>
-    <form class="form-horizontal" name="updatepost" action="?ctrl=admin&action=update&id=<?php echo $item->id;?>" method="post">
-        <fieldset>
-            <legend>Редактирование новости</legend>
-            <div class="form-group">
-                <label for="title" class="col-lg-2 control-label">Заголовок</label>
-                <div class="col-lg-10">
-                    <input type="text" name="title" class="form-control" placeholder="Заголовок" value="<?php echo $item->title;?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="textArea" class="col-lg-2 control-label">Новость</label>
-                <div class="col-lg-10">
-                    <textarea class="form-control" rows="5" name="text" id="textArea"><?php echo $item->text;?></textarea>
-                    <span class="help-block">Описание события</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="title" class="col-lg-2 control-label">Дата</label>
-                <div class="col-lg-10">
-                    <input type="text" name="date" class="form-control"  disabled
-                           value=<?php echo '"' . date('d-m-Y') . '"'; ?>>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="title" class="col-lg-2 control-label">Автор</label>
-                <div class="col-lg-10">
-                    <input type="text" name="author" value="<?php echo $item->author;?>"class="form-control" placeholder="Автор">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" name="updateit" class="btn btn-primary">Сохранить изменения</button>
-                </div>
-            </div>
+        ?>
+        <form class="form-horizontal" name="updatepost" action="?ctrl=admin&action=update&id=<?php echo $item->id;?>"
+              method="post">
+            <fieldset>
+                <legend>Редактирование новости</legend>
+                <div class="form-group">
+                    <label for="title" class="col-lg-2 control-label">Заголовок</label>
 
-        </fieldset>
-    </form>
+                    <div class="col-lg-10">
+                        <input type="text" name="title" class="form-control" placeholder="Заголовок"
+                               value="<?php echo $item->title;?>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="textArea" class="col-lg-2 control-label">Новость</label>
+
+                    <div class="col-lg-10">
+                        <textarea class="form-control" rows="5" name="text"
+                                  id="textArea"><?php echo $item->text;?></textarea>
+                        <span class="help-block">Описание события</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-lg-2 control-label">Дата</label>
+
+                    <div class="col-lg-10">
+                        <input type="text" name="date" class="form-control" disabled
+                               value=<?php echo '"' . date('d-m-Y') . '"'; ?>>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title" class="col-lg-2 control-label">Автор</label>
+
+                    <div class="col-lg-10">
+                        <input type="text" name="author" value="<?php echo $item->author;?>" class="form-control"
+                               placeholder="Автор">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" name="updateit" class="btn btn-primary">Сохранить изменения</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
     <?php endforeach; ?>
     <?php
 
@@ -147,7 +157,7 @@ session_start()
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 </body>
-</html><?php
+    </html><?php
 /**
  * Created by PhpStorm.
  * User: Анна

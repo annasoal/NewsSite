@@ -33,14 +33,15 @@ session_start()
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/index.php"> Главная страница <span class="sr-only">(current)</span></a>
                         </li>
-                        <li><a href="?ctrl=admin&action=addOne">Добавить новость</a></li>
+                        <li><a href="?ctrl=admin&action=showaddOne">Добавить новость</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">Пользовательское меню <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="?ctrl=admin&action=addOne">Зарегистрироваться</a></li>
-                                <li><a href="#">Авторизоваться</a></li>
-                                <li><a href="#">Просмотреть/изменить профиль</a></li>
+                                <li><a href="?ctrl=users&action=showRegistrationForm">Зарегистрироваться</a></li>
+                                <li><a href="?ctrl=users&action=showAuthorizationForm"">Авторизоваться</a></li>
+                                <li><a href="?ctrl=users&action=showProfile&id=<?php echo $_SESSION['id'] ?>">Просмотреть/изменить
+                                        профиль</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                                 <li class="divider"></li>
@@ -63,76 +64,84 @@ session_start()
         </nav>
     </div>
 
-
     <form class="form-horizontal" method="post" action="?ctrl=users&action=addUser" name="adduser">
-    <fieldset>
-        <legend>Форма регистрации</legend>
-        <div class="form-group">
-            <label for="firstname" class="col-lg-2 control-label">Имя</label>
-            <div class="col-lg-10">
-                <input type="text" name="firstname" class="form-control" id="firstname" placeholder="Имя пользователя">
-            </div>
-        </div><div class="form-group">
-            <label for="lastname" class="col-lg-2 control-label">Фамилия</label>
-            <div class="col-lg-10">
-                <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Фамилия пользователя">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputEmail" class="col-lg-2 control-label">Электронная почта</label>
-            <div class="col-lg-10">
-                <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword" class="col-lg-2 control-label">Пароль</label>
-            <div class="col-lg-10">
-                <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Пароль">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="remember"> Запомнить меня
-                    </label>
-                </div>
-            </div>
-        </div>
+        <fieldset>
+            <legend>Форма регистрации</legend>
+            <div class="form-group">
+                <label for="firstname" class="col-lg-2 control-label">Имя</label>
 
-        <div class="form-group">
-            <label class="col-lg-2 control-label">Пол</label>
-            <div class="col-lg-10">
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsGender" id="optionsRadios1" value="Женский" checked="">
-                        Женский пол
-                    </label>
-                </div>
-                <div class="radio">
-                    <label>
-                        <input type="radio" name="optionsGender" id="optionsRadios2" value="Мужской">
-                        Мужской пол
-                    </label>
+                <div class="col-lg-10">
+                    <input type="text" name="firstname" class="form-control" id="firstname"
+                           placeholder="Имя пользователя">
                 </div>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="lastname" class="col-lg-2 control-label">Фамилия</label>
 
-        <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                <button type="reset" class="btn btn-default">Очистить форму</button>
-                <button type="submit" name="register" class="btn btn-primary">Зарегистрироваться</button>
+                <div class="col-lg-10">
+                    <input type="text" name="lastname" class="form-control" id="lastname"
+                           placeholder="Фамилия пользователя">
+                </div>
             </div>
-        </div>
-    </fieldset>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Электронная почта</label>
+
+                <div class="col-lg-10">
+                    <input type="text" name="email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-lg-2 control-label">Пароль</label>
+
+                <div class="col-lg-10">
+                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Пароль">
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember"> Запомнить меня
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-2 control-label">Пол</label>
+
+                <div class="col-lg-10">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsGender" id="optionsRadios1" value="Женский" checked="">
+                            Женский пол
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsGender" id="optionsRadios2" value="Мужской">
+                            Мужской пол
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Очистить форму</button>
+                    <button type="submit" name="register" class="btn btn-primary">Зарегистрироваться</button>
+                </div>
+            </div>
+        </fieldset>
     </form>
 
     <?php
     If (($_SESSION ['errors']) != '') {
-    echo '<div class="jumbotron"> <h4>' .
+        echo '<div class="jumbotron"> <h4>' .
             $_SESSION['errors'] . '</h4></div>';
-    unset ($_SESSION['errors']);
+        unset ($_SESSION['errors']);
     }
     If (($_SESSION ['ok']) != '') {
-    echo '<div class="jumbotron"> <h4>' .
+        echo '<div class="jumbotron"> <h4>' .
             $_SESSION['ok'] . '</h4></div>';
-    unset ($_SESSION['ok']);
+        unset ($_SESSION['ok']);
     }
     ?>
 

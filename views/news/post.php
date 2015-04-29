@@ -33,14 +33,15 @@ session_start()
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/index.php"> Главная страница <span class="sr-only">(current)</span></a>
                         </li>
-                        <li><a href="?ctrl=admin&action=addOne">Добавить новость</a></li>
+                        <li><a href="?ctrl=admin&action=showaddOne">Добавить новость</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">Dropdown <span class="caret"></span></a>
+                               aria-expanded="false">Пользовательское меню <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="?ctrl=users&action=showRegistrationForm">Зарегистрироваться</a></li>
+                                <li><a href="?ctrl=users&action=showAuthorizationForm"">Авторизоваться</a></li>
+                                <li><a href="?ctrl=users&action=showProfile&id=<?php echo $_SESSION['id'] ?>">Просмотреть/изменить
+                                        профиль</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                                 <li class="divider"></li>
@@ -59,6 +60,7 @@ session_start()
                     </ul>
                 </div>
             </div>
+
         </nav>
     </div>
 
@@ -68,12 +70,14 @@ session_start()
             <legend>Добавление новости</legend>
             <div class="form-group">
                 <label for="title" class="col-lg-2 control-label">Заголовок</label>
+
                 <div class="col-lg-10">
                     <input type="text" name="title" class="form-control" placeholder="Заголовок">
                 </div>
             </div>
             <div class="form-group">
                 <label for="textArea" class="col-lg-2 control-label">Новость</label>
+
                 <div class="col-lg-10">
                     <textarea class="form-control" rows="5" name="text" id="textArea"></textarea>
                     <span class="help-block">Описание события</span>
@@ -81,6 +85,7 @@ session_start()
             </div>
             <div class="form-group">
                 <label for="title" class="col-lg-2 control-label">Дата</label>
+
                 <div class="col-lg-10">
                     <input type="text" name="date" class="form-control" placeholder="Заголовок" disabled
                            value=<?php echo '"' . date('d-m-Y') . '"'; ?>>
@@ -88,6 +93,7 @@ session_start()
             </div>
             <div class="form-group">
                 <label for="title" class="col-lg-2 control-label">Автор</label>
+
                 <div class="col-lg-10">
                     <input type="text" name="author" class="form-control" placeholder="Автор">
                 </div>
@@ -120,18 +126,18 @@ session_start()
         <div class="row">
             <div class="col-lg-12">
                 <copyright>
-                <ul class="list-unstyled">
-                    <li class="pull-right"><a href="#top">Наверх</a></li>
-                    <li><a href="#" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
-                    <li><a href="#">RSS</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">API</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
-                <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>.
-                    Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.
-                    Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
+                    <ul class="list-unstyled">
+                        <li class="pull-right"><a href="#top">Наверх</a></li>
+                        <li><a href="#" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
+                        <li><a href="#">RSS</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                    <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>.
+                        Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.
+                        Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
 
             </div>
         </div>

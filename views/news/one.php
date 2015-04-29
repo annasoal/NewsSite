@@ -33,14 +33,15 @@ session_start()
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/index.php"> Главная страница <span class="sr-only">(current)</span></a>
                         </li>
-                        <li><a href="?ctrl=admin&action=addOne">Добавить новость</a></li>
+                        <li><a href="?ctrl=admin&action=showaddOne">Добавить новость</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false">Dropdown <span class="caret"></span></a>
+                               aria-expanded="false">Пользовательское меню <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
+                                <li><a href="?ctrl=users&action=showRegistrationForm">Зарегистрироваться</a></li>
+                                <li><a href="?ctrl=users&action=showAuthorizationForm"">Авторизоваться</a></li>
+                                <li><a href="?ctrl=users&action=showProfile&id=<?php echo $_SESSION['id'] ?>">Просмотреть/изменить
+                                        профиль</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                                 <li class="divider"></li>
@@ -68,11 +69,11 @@ session_start()
     <?php
 
     foreach ($items as $item):
-    ?>
-    <div class="jumbotron">
-        <h2> <?php echo $item->title; ?></h2>
-        <?php echo '<p class="lead">', $item->text, '</p>', $item->author, '<br>', '<span>', $item->date, '<span>'; ?>
-    </div>
+        ?>
+        <div class="jumbotron">
+            <h2> <?php echo $item->title; ?></h2>
+            <?php echo '<p class="lead">', $item->text, '</p>', $item->author, '<br>', '<span>', $item->date, '<span>'; ?>
+        </div>
     <?php endforeach; ?>
 
     <div class="panel panel-success">
@@ -80,30 +81,30 @@ session_start()
             <h3 class="panel-title">Работа с контентом</h3>
         </div>
         <div class="panel-body">
-            <?php echo '<a href="?ctrl=admin&action=update&id=' . $item->id?>" class="btn btn-primary"> Изменить новость</a>
-            <?php echo '<a href="?ctrl=admin&action=delete&id=' . $item->id?>" class="btn btn-danger">Удалить новость</a>
+            <?php echo '<a href="?ctrl=admin&action=showUpdateOne&id=' . $item->id ?>" class="btn btn-primary"> Изменить
+            новость</a>
+            <?php echo '<a href="?ctrl=admin&action=delete&id=' . $item->id ?>" class="btn btn-danger">Удалить
+            новость</a>
         </div>
     </div>
-
-
 
 
     <footer>
         <div class="row">
             <div class="col-lg-12">
                 <copyright>
-                <ul class="list-unstyled">
-                    <li class="pull-right"><a href="#top">Наверх</a></li>
-                    <li><a href="#" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
-                    <li><a href="#">RSS</a></li>
-                    <li><a href="#">Twitter</a></li>
-                    <li><a href="#">GitHub</a></li>
-                    <li><a href="#">API</a></li>
-                    <li><a href="#">Support</a></li>
-                </ul>
-                <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>.
-                    Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.
-                    Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
+                    <ul class="list-unstyled">
+                        <li class="pull-right"><a href="#top">Наверх</a></li>
+                        <li><a href="#" onclick="pageTracker._link(this.href); return false;">Blog</a></li>
+                        <li><a href="#">RSS</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">GitHub</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                    <p>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>.
+                        Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.
+                        Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.</p>
 
             </div>
         </div>

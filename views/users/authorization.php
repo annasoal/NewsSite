@@ -33,14 +33,15 @@ session_start()
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/index.php"> Главная страница <span class="sr-only">(current)</span></a>
                         </li>
-                        <li><a href="?ctrl=admin&action=addOne">Добавить новость</a></li>
+                        <li><a href="?ctrl=admin&action=showaddOne">Добавить новость</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">Пользовательское меню <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="?ctrl=admin&action=addOne">Зарегистрироваться</a></li>
-                                <li><a href="#">Авторизоваться</a></li>
-                                <li><a href="#">Просмотреть/изменить профиль</a></li>
+                                <li><a href="?ctrl=users&action=showRegistrationForm">Зарегистрироваться</a></li>
+                                <li><a href="?ctrl=users&action=showAuthorizationForm"">Авторизоваться</a></li>
+                                <li><a href="?ctrl=users&action=showProfile&id=<?php echo $_SESSION['id'] ?>">Просмотреть/изменить
+                                        профиль</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Separated link</a></li>
                                 <li class="divider"></li>
@@ -65,32 +66,35 @@ session_start()
 
 
     <form class="form-horizontal" method="post" action="?ctrl=users&action=findUser" name="finduser">
-    <fieldset>
-        <legend>Форма авторизации</legend>
+        <fieldset>
+            <legend>Форма авторизации</legend>
 
-        <div class="form-group">
-            <label for="inputEmail" class="col-lg-2 control-label">Логин</label>
-            <div class="col-lg-10">
-                <input type="text" name="login" class="form-control" id="inputEmail" placeholder="Email">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword" class="col-lg-2 control-label">Пароль</label>
-            <div class="col-lg-10">
-                <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Пароль">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="remember"> Запомнить меня
-</label>
+            <div class="form-group">
+                <label for="inputEmail" class="col-lg-2 control-label">Логин</label>
+
+                <div class="col-lg-10">
+                    <input type="text" name="login" class="form-control" id="inputEmail" placeholder="Email">
                 </div>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="inputPassword" class="col-lg-2 control-label">Пароль</label>
 
-        <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                <button type="reset" class="btn btn-default">Очистить форму</button>
-                <button type="submit" name="authorize" class="btn btn-primary">Авторизоваться</button>
+                <div class="col-lg-10">
+                    <input type="password" name="pass" class="form-control" id="inputPassword" placeholder="Пароль">
+
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="remember"> Запомнить меня
+                        </label>
+                    </div>
+                </div>
             </div>
+
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="reset" class="btn btn-default">Очистить форму</button>
+                    <button type="submit" name="authorize" class="btn btn-primary">Авторизоваться</button>
+                </div>
     </form>
 
     <?php
@@ -105,8 +109,6 @@ session_start()
         unset ($_SESSION['authorizeok']);
     }
     ?>
-
-
 
 
 </div>

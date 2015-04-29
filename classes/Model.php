@@ -1,4 +1,5 @@
 <?php
+
 //require __DIR__ . '/../classes/DataB.php';
 
 abstract class Model
@@ -27,8 +28,8 @@ abstract class Model
         $class = static::class;
         $sql = 'SELECT * FROM ' . static::setTableName() . ' WHERE id=:id';
         $db = new DataB();
-        $res =  $db->getData($class, $sql, [':id' => $id]);
-        if (false != $res ) {
+        $res = $db->getData($class, $sql, [':id' => $id]);
+        if (false != $res) {
             return $res;
         } else {
             throw new E404Exception();
@@ -41,8 +42,8 @@ abstract class Model
 
         foreach ($values as $k => $el) {
             if (($el != null)) {
-                $cols[] =$k;
-                $vals[] =  ':' . $k;
+                $cols[] = $k;
+                $vals[] = ':' . $k;
                 $params[':' . $k] = $el;
             }
         }
@@ -65,7 +66,7 @@ abstract class Model
         return $db->execChanges($sql, [':id' => $this->id]);
     }
 
-    public  function update()
+    public function update()
     {
         $values = $this->data;
 
@@ -75,7 +76,7 @@ abstract class Model
                 $params[':' . $k] = $el;
             }
         }
-        $strStr = implode(',',$str);
+        $strStr = implode(',', $str);
 
         $sql = 'UPDATE ' . static::setTableName() . ' SET ' . $strStr . ' WHERE id=:id';
 
