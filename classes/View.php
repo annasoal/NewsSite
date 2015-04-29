@@ -1,8 +1,8 @@
 <?php
-
+namespace App\ViewModel;
 
 class View
-    implements Countable
+    implements \Countable
 
 {
     protected $path;

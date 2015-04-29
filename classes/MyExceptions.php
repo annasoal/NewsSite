@@ -1,8 +1,10 @@
 <?php
 
+namespace App\Exceptions;
+use App\ViewModel\View;
 
 class MyExceptions
-    extends Exception
+    extends \Exception
 {
 protected $message;
 

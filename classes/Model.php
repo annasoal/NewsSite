@@ -1,6 +1,8 @@
 <?php
 
-//require __DIR__ . '/../classes/DataB.php';
+namespace App\Models;
+use App\Pdo\DataB;
+use App\Exceptions\E404Exception;
 
 abstract class Model
 {
