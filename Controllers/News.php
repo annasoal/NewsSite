@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\News;
-use App\ViewModel\View;
 
-class ViewNews
+use App\Models\News as Model;
+use App\GeneralClasses\View;
 
+class News
 
 {
     protected $view;
@@ -15,9 +15,10 @@ class ViewNews
         $this->view = new View(__DIR__ . '/../views/news/');
     }
 
-    public function actionAll()
+
+    public function actionAll( )
     {
-        $this->view->items = News::findAll();
+        $this->view->items = Model::findAll();
         $this->view->display('all');
     }
 
@@ -25,7 +26,7 @@ class ViewNews
     public function actionOne()
     {
         $id = $_GET['id'];
-        $this->view->items = News::findOne($id);//получили массив новости
+        $this->view->items = Model::findOne($id);//получили массив новости
         $this->view->display('one');
 
     }

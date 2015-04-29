@@ -1,5 +1,5 @@
 <?php
-namespace App\Exceptions;
+namespace App\GeneralClasses;
 
 class E404Exception
     extends MyExceptions

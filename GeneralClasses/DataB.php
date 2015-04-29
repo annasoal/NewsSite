@@ -1,7 +1,8 @@
 <?php
-namespace App\Pdo;
+namespace App\GeneralClasses;
 
 class DataB
+
 {
     protected $dbh;
 
@@ -9,7 +10,7 @@ class DataB
     {
         $config = include __DIR__ . '/../configs/db.php';
         $dsn = 'mysql:dbname=' . $config['dname'] . ';host=' . $config['host'];
-        $this->dbh = new PDO($dsn, $config['user'], $config['password']);
+        $this->dbh = new \PDO($dsn, $config['user'], $config['password']);
     }
 
     public function getData($class, $sql, $params = [])
@@ -17,7 +18,7 @@ class DataB
     {
         $sth = $this->dbh->prepare($sql);
         $sth->execute($params);
-        $arr = $sth->fetchAll(PDO::FETCH_CLASS, $class);
+        $arr = $sth->fetchAll(\PDO::FETCH_CLASS, $class);
         return $arr;
 
     }

@@ -1,17 +1,17 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\News;
-use App\Exceptions\E403Exception;
-use App\General\App;
-use App\ViewModel\View;
+use App\Models\News as Model;
+use App\GeneralClasses\E403Exception;
+use App\GeneralClasses\Application as App;
+use App\GeneralClasses\View;
 
 class AdminNews
 
 {
     protected $view;
     protected $userrole;
-    public static $model = 'News';
+    //public static $model = 'News';
 
     public function __construct()
     {
@@ -32,7 +32,7 @@ class AdminNews
     {
         if (isset($_POST['postit'])) {
             if ($_POST['title'] != '' && $_POST['text'] != '') {
-                $news = new News();
+                $news = new Model();
                 $news->title = $_POST['title'];
                 $news->text = $_POST['text'];
                 $news->author = $_POST['author'];
@@ -53,8 +53,7 @@ class AdminNews
     {
 
         $this->id = $_GET['id'];
-        $model = static::$model;
-        $this->view->items = $model::findOne($this->id);//получили массив новости
+        $this->view->items = Model::findOne($this->id);//получили массив новости
         $this->view->display('update');
     }
 
@@ -62,8 +61,7 @@ class AdminNews
     {
         if (isset($_POST['updateit'])) {
             $id = $_GET['id'];
-            $model = static::$model;
-            $news = $model::findOne($id)[0];
+            $news = Model::findOne($id)[0];
             if ($_POST['title'] != '' && $_POST['text'] != '') {
                 $news->title = $_POST['title'];
                 $news->text = $_POST['text'];
@@ -72,7 +70,7 @@ class AdminNews
                 $res = $news->update();
 
                 if ($res !== false) {
-                    $this->view->items = News::findOne($news->id);
+                    $this->view->items = Model::findOne($news->id);
                     $this->view->display('one');
                 }
 
@@ -87,8 +85,7 @@ class AdminNews
     public function delete()
     {
         $id = $_GET['id'];
-        $model = static::$model;
-        $news = $model::findOne($id)[0];
+        $news = Model::findOne($id)[0];
         $res = $news->delete();
 
         $this->view->display('delete');

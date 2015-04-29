@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Exceptions;
-use App\ViewModel\View;
+namespace App\GeneralClasses;
+
 
 class MyExceptions
     extends \Exception

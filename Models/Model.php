@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Models;
-use App\Pdo\DataB;
-use App\Exceptions\E404Exception;
+use App\GeneralClasses\DataB;
+use App\GeneralClasses\E404Exception;
 
 abstract class Model
 {

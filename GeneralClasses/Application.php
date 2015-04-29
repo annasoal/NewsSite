@@ -1,7 +1,7 @@
 <?php
-namespace App\General;
+namespace App\GeneralClasses;
 
-class App
+class Application
 {
 
     public static function getCurrentUserRole()

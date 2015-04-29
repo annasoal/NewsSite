@@ -94,7 +94,7 @@ session_start()
 
                     <div class="col-lg-10">
                         <input type="text" name="date" class="form-control" disabled
-                               value=<?php echo '"' . date('d-m-Y') . '"'; ?>>
+                               value=<?php echo '"' . date('d-Models-Y') . '"'; ?>>
                     </div>
                 </div>
                 <div class="form-group">

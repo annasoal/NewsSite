@@ -1,6 +1,6 @@
 <?php
 namespace App\Models;
-use App\Pdo\DataB;
+use App\GeneralClasses\DataB;
 
 
 class User

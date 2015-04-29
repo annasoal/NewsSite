@@ -1,5 +1,5 @@
 <?php
-namespace App\ViewModel;
+namespace App\GeneralClasses;
 
 class View
     implements \Countable
