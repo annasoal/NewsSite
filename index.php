@@ -1,9 +1,9 @@
 <?php
 session_start();
-var_dump($_GET['__route']);
+//var_dump($_GET['__route']);
 //die;
-//use App\GeneralClasses\E403Exception;
-//use App\GeneralClasses\E404Exception;
+use App\GeneralClasses\E403Exception;
+use App\GeneralClasses\E404Exception;
 
 require_once __DIR__ . '/autoload.php';
 $ctrl = !empty($_GET['ctrl']) ? $_GET['ctrl'] : 'news';
