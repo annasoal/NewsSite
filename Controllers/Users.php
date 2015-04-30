@@ -1,7 +1,9 @@
 <?php
 namespace App\Controllers;
+use App\GeneralClasses\MyMailer;
 use App\Models\User as Model;
 use App\GeneralClasses\View;
+
 
 class Users
 {
@@ -33,12 +35,19 @@ class Users
                 $users->insert();
                 if ($users->id !== false) {
                     $_SESSION['ok'] = 'Пользователь добавлен, перейдите  <a href="?ctrl=users&action=showProfile&id=' .
-                        $users->id . '"> на  страницу для просмотра профиля </a>. Id пользователя:' . $users->id;
+                    $users->id . '"> на  страницу для просмотра профиля </a>. Id пользователя:' . $users->id;
+                    $_SESSION['login'] = $users->login;
+                    $mail = new MyMailer();
+                    $mail->sendmail();
+                    $mail->showConfirm();
+                    $this->showAuthorizationForm();
+
                 }
             } elseif ($_POST['email'] == '' || $_POST['password'] == '') {
                 $_SESSION['errors'] = 'Не введены обязательные данные';
+                $this->showRegistrationForm();
             }
-            header('Location: http://newssite/index.php?ctrl=users&action=showRegistrationForm');
+
             exit;
         }
     }

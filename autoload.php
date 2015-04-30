@@ -1,4 +1,9 @@
 <?php
+
+spl_autoload_register('__autoload');
+
+require __DIR__.'/vendor/autoload.php';
+
 function __autoload($class)
 {
     if (false != strpos($class, '\\')) {
@@ -15,19 +20,4 @@ function __autoload($class)
         }
     }
 
-
-    /*   $paths = [
-           __DIR__ . '/GeneralClasses',
-           __DIR__ . '/Controllers',
-           __DIR__ . '/Models',
-       ];
-       foreach ($paths as $path) {
-           $fileName = $path . '/' . $class . '.php';
-           if (file_exists($fileName)) {
-               require $fileName;
-               return true;
-           }
-       }
-       return false;
-   }*/
 }

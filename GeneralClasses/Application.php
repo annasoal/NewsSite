@@ -8,4 +8,8 @@ class Application
     {
         return $_SESSION['role'];
     }
+    public static function getCurrentUserLogin()
+    {
+        return $_SESSION['login'];
+    }
 }
