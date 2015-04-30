@@ -1,6 +1,6 @@
 <?php
 session_start();
-//var_dump($_GET['__route']);
+var_dump($_GET);
 //die;
 use App\GeneralClasses\E403Exception;
 use App\GeneralClasses\E404Exception;
