@@ -54,7 +54,7 @@ public function sendMail() {
     $this->Username = "annaalexandrovnas@yandex.ru";
 
 //Password to use for SMTP authentication
-    $this->Password = "sseezzaamm28091980";
+    $this->Password = "8888888888888888888";
 
 //Set who the message is to be sent from
     $this->setFrom('annaalexandrovnas@yandex.ru', 'Анна Соколова');
