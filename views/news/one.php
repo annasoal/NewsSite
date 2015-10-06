@@ -64,7 +64,25 @@ session_start()
         </nav>
     </div>
 
+
     <?php
+
+    If (($_SESSION ['posterrors']) != '') {
+        echo '<div class="jumbotron"> <h4>' .
+            $_SESSION['posterrors'] . '</h4></div>';
+        unset ($_SESSION['posterrors']);
+    }
+    If (($_SESSION ['postok']) != '') {
+        echo '<div class="jumbotron"> <h4>' .
+            $_SESSION['postok'] . '</h4></div>';
+        unset ($_SESSION['postok']);
+    }
+    If (($_SESSION ['updateok']) != '') {
+        echo '<div class="jumbotron"> <h4>' .
+            $_SESSION['updateok'] . '</h4></div>';
+        unset ($_SESSION['updateok']);
+    }
+
 
     foreach ($items as $item):
         ?>

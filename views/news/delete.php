@@ -33,7 +33,7 @@ session_start()
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="/index.php"> Главная страница <span class="sr-only">(current)</span></a>
                         </li>
-                        <li><a href="?ctrl=admin&action=showaddOne">Добавить новость</a></li>
+                        <li><a href="?ctrl=admin&action=showaddOne">Удалить новость</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">Пользовательское меню <span class="caret"></span></a>
@@ -77,7 +77,7 @@ session_start()
     If (($_SESSION ['delok']) != '') {
         echo '<div class="jumbotron"> <h4>' .
             $_SESSION['delok'] . '</h4></div>';
-        unset ($_SESSION['delokk']);
+        unset ($_SESSION['delok']);
     }
     ?>
 

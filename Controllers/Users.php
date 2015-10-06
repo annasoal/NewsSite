@@ -101,4 +101,18 @@ class Users
         $this->view->items = Model::findOne($id);
         $this->view->display('profile');
     }
+    public function deleteProfile(){
+        $id = $_GET['id'];
+        $user = Model::findOne($id)[0];
+        $res = $user->delete();
+
+        $this->view->display('delete');
+        if (false !== $res) {
+            $_SESSION['delok'] = 'Профиль удален';
+        } else {
+            $_SESSION['delerrors'] = 'Профиль невозможно удалить';
+        }
+        exit;
+
+    }
 }

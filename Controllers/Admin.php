@@ -39,13 +39,15 @@ class Admin
                 $news->values = $news->data();
                 $news->insert();
                 if ($news->id !== false) {
-                    $_SESSION['postok'] = 'Новость добавлена, перейдите на главную страницу для просмотра. Id новости:' .
+                    $_SESSION['postok'] = 'Новость добавлена. Id новости:' .
                         $news->id;
                 }
             } elseif ($_POST['title'] == '' || $_POST['text'] == '') {
                 $_SESSION['posterrors'] = 'Не введены обязательные данные';
             }
-            header('Location: http://newssite/index.php?ctrl=admin&action=showaddOne');
+            $id = $news->id;
+            $this->view->items =  Model::findOne($id);
+            $this->view->display('one');
             exit;
         }
     }
@@ -71,6 +73,7 @@ class Admin
                 $res = $news->update();
 
                 if ($res !== false) {
+                    $_SESSION['updateok'] = 'Новость изменена';
                     $this->view->items = Model::findOne($news->id);
                     $this->view->display('one');
                 }
